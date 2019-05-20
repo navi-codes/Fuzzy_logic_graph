@@ -1,6 +1,6 @@
 """
 Title:     fuzzy logic Program
-Author:    A navaneethraj, RV Parthasarathi
+Author:    A Navaneethraj, RV Parthasarathi
 Version:   4.2.0 (Arithmetic operations)
 python Version: 3.5.2
 """
@@ -85,6 +85,9 @@ def Multiplication(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option,midpoin
         print("\nThe multiplication  of A and B is ",graph_xc)
         angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number \n"))
         if(angle==1):
+            plot_cross(graph_xa,graph_ya)
+            plot_cross(graph_xb,graph_yb)
+            plot_cross(graph_xc,graph_yc)
             plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
         elif(angle==2):
             reverse(graph_xa,graph_ya,color="red",label="A")
