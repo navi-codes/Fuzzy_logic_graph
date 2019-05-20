@@ -8,11 +8,11 @@ import matplotlib.pyplot as mpl
 import matplotlib.patches as mpatches
 
 
-def plot_cross(graph_x,graph_y):
+def plot_cross(graph_x,graph_y,crossColor):
     for i in range (0,len(graph_x)):      #To plot the multiple cutting line
         temp_x=[graph_x[i],graph_x[i]]          #for sending the y value it plot for each cutting line it will move to the next y value
         y=[0,graph_y[i]]
-        mpl.plot(temp_x,y,'--m')
+        mpl.plot(temp_x,y,crossColor)
         temp_x=[graph_y[i],graph_y[i]]          #for sending the y value it plot for each cutting line it will move to the next y value
         y=[0,graph_x[i]]
         clr="red"
@@ -29,14 +29,14 @@ def Addition(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_yc,midpoint=basic_opp(option,graph_xc,n,fuzzy_no,"Addition of A and B")
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number \n"))
     if(angle==1):
-        plot_cross(graph_xa,graph_ya)
-        plot_cross(graph_xb,graph_yb)
-        plot_cross(graph_xc,graph_yc)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xb,graph_yb,'--g')
+        plot_cross(graph_xc,graph_yc,'--b')
         plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A+B")
     elif(angle==2):
-        reverse(graph_xa,graph_ya,color="red",label="A")
-        reverse(graph_xb,graph_yb,color="green",label="B")
-        reverse(graph_xc,graph_yc,color="blue",label="A+B")
+        reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+        reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+        reverse(graph_xc,graph_yc,color="blue",label="A+B",crossColor='--b')
 
 def Subtraction(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_xb=graph_xb[::-1]
@@ -44,14 +44,14 @@ def Subtraction(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_yc,midpoint=basic_opp(option,graph_xc,n,fuzzy_no,"Subtraction of A and B")
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number \n"))
     if(angle==1):
-        plot_cross(graph_xa,graph_ya)
-        plot_cross(graph_xb,graph_yb)
-        plot_cross(graph_xc,graph_yc)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xb,graph_yb,'--g')
+        plot_cross(graph_xc,graph_yc,'--b')
         plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A-B")
     elif(angle==2):
-        reverse(graph_xa,graph_ya,color="red",label="A")
-        reverse(graph_xb,graph_yb,color="green",label="B")
-        reverse(graph_xc,graph_yc,color="blue",label="A-B")
+        reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+        reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+        reverse(graph_xc,graph_yc,color="blue",label="A-B",crossColor='--b')
 
 def Multiplication(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option,midpoint):
     if(option==1):
@@ -66,14 +66,15 @@ def Multiplication(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option,midpoin
         print("\nThe multiplication  of A and B is ",graph_xc)
         angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number \n"))
         if(angle==1):
-            plot_cross(graph_xa,graph_ya)
-            plot_cross(graph_xb,graph_yb)
-            plot_cross(graph_xc,graph_yc)
+            plot_cross(graph_xa,graph_ya,'--r')
+            plot_cross(graph_xb,graph_yb,'--g')
+            plot_cross(graph_xc,graph_yc,'--b')
             plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
         elif(angle==2):
-            reverse(graph_xa,graph_ya,color="red",label="A")
-            reverse(graph_xb,graph_yb,color="green",label="B")
-            reverse(graph_xc,graph_yc,color="blue",label="A*B")
+            reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+            reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+            reverse(graph_xc,graph_yc,color="blue",label="A*B",crossColor='--b')
+
     elif(option==2):
         graph_xc=[]
         for i in range(0,midpoint[1]):
@@ -86,14 +87,15 @@ def Multiplication(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option,midpoin
         print("\nThe multiplication  of A and B is ",graph_xc)
         angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number \n"))
         if(angle==1):
-            plot_cross(graph_xa,graph_ya)
-            plot_cross(graph_xb,graph_yb)
-            plot_cross(graph_xc,graph_yc)
+            plot_cross(graph_xa,graph_ya,'--r')
+            plot_cross(graph_xb,graph_yb,'--g')
+            plot_cross(graph_xc,graph_yc,'--b')
             plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
         elif(angle==2):
-            reverse(graph_xa,graph_ya,color="red",label="A")
-            reverse(graph_xb,graph_yb,color="green",label="B")
-            reverse(graph_xc,graph_yc,color="blue",label="A*B")
+            reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+            reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+            reverse(graph_xc,graph_yc,color="blue",label="A*B",crossColor='--b')
+
 
 def Division(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_xb=graph_xb[::-1]
@@ -102,13 +104,13 @@ def Division(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     angle=int(input("press 1 Graphicly Normal order fuzzy number\npress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
         plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A/B")
-        plot_cross(graph_xa,graph_ya)
-        plot_cross(graph_xb,graph_yb)
-        plot_cross(graph_xc,graph_yc)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xb,graph_yb,'--g')
+        plot_cross(graph_xc,graph_yc,'--b')
     elif(angle==2):
-        reverse(graph_xa,graph_ya,color="red",label="A")
-        reverse(graph_xb,graph_yb,color="green",label="B")
-        reverse(graph_xc,graph_yc,color="blue",label="A/B")
+        reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+        reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+        reverse(graph_xc,graph_yc,color="blue",label="A/B",crossColor='--b')
 
 def minimum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_xc=[min(graph_xa[i],graph_xb[i]) for i in range(len(graph_xa))]
@@ -116,13 +118,13 @@ def minimum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     angle=int(input("press 1 Graphicly Normal order fuzzy number\npress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
         plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"min")
-        plot_cross(graph_xa,graph_ya)
-        plot_cross(graph_xb,graph_yb)
-        plot_cross(graph_xc,graph_yc)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xb,graph_yb,'--g')
+        plot_cross(graph_xc,graph_yc,'--b')
     elif(angle==2):
-        reverse(graph_xa,graph_ya,color="red",label="A")
-        reverse(graph_xb,graph_yb,color="green",label="B")
-        reverse(graph_xc,graph_yc,color="blue",label="min(A,B)")
+        reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+        reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+        reverse(graph_xc,graph_yc,color="blue",label="A/B",crossColor='--b')
 
 def maximum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_xc=[max(graph_xa[i],graph_xb[i]) for i in range(len(graph_xa))]
@@ -130,13 +132,13 @@ def maximum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
         plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max")
-        plot_cross(graph_xa,graph_ya)
-        plot_cross(graph_xb,graph_yb)
-        plot_cross(graph_xc,graph_yc)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xb,graph_yb,'--g')
+        plot_cross(graph_xc,graph_yc,'--b')
     elif(angle==2):
-        reverse(graph_xa,graph_ya,color="red",label="A")
-        reverse(graph_xb,graph_yb,color="green",label="B")
-        reverse(graph_xc,graph_yc,color="blue",label="max(A,B)")
+        reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
+        reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
+        reverse(graph_xc,graph_yc,color="blue",label="min A",crossColor='--b')
 
 def scalar_mul(graph_x,graph_y):
     print("\n enter the multiplicand")
@@ -150,11 +152,11 @@ def scalar_mul(graph_x,graph_y):
         mpl.plot(graph_xc,graph_y,color="blue",label="Scalar A")
         mpl.plot(graph_x,graph_y,color="red",label="graph A")
         mpl.legend()
-        plot_cross(graph_x,graph_y)
-        plot_cross(graph_xc,graph_y)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xc,graph_yc,'--b')
     elif(angle==2):
-        reverse(graph_x,graph_y,color="red",label="A")
-        reverse(graph_xc,graph_y,color="blue",label="Scalar A")
+        reverse(graph_x,graph_y,color="red",label="A",crossColor='--r')
+        reverse(graph_xc,graph_y,color="blue",label="Scalar A",crossColor='--b')
 
 def inverse(graph_x,graph_y):
     j=len(graph_x)-1
@@ -163,21 +165,21 @@ def inverse(graph_x,graph_y):
     print("Inverse of A is",graph_xc,"\nAlpha cut value is ", graph_y)
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
-        plot_cross(graph_x,graph_y)
-        plot_cross(graph_xc,graph_y)
+        plot_cross(graph_xa,graph_ya,'--r')
+        plot_cross(graph_xc,graph_yc,'--b')
         mpl.plot(graph_xc,graph_y,color="blue",label="Inverse A")
         mpl.plot(graph_x,graph_y,color="red",label="Graph A")
         mpl.legend()
     elif(angle==2):
-        reverse(graph_x,graph_y,color="red",label="A")
-        reverse(graph_xc,graph_y,color="blue",label="Inverse A")
+        reverse(graph_x,graph_y,color="red",label="A",crossColor='--r')
+        reverse(graph_xc,graph_y,color="blue",label="Inverse A",crossColor='--b')
 
-def reverse(graph_x,graph_y,color,label):
+def reverse(graph_x,graph_y,color,label,crossColor):
     initial_length=len(graph_y)
     if((initial_length % 2)==0):
         graph_y = graph_y[(round((len(graph_y))/2)):len(graph_y)]
         graph_y.extend(graph_y[::-1])
-        plot_cross(graph_x,graph_y)
+        plot_cross(graph_x,graph_y,crossColor)
         mpl.plot(graph_x,graph_y,color=color,label=label)
         mpl.legend()
     else:
