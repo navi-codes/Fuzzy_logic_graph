@@ -142,7 +142,8 @@ def scalar_mul(graph_x,graph_y):
     multiplicand=int(input())
     graph_xc=[(multiplicand*graph_x[i]) for i in range(len(graph_x))]
     graph_xc.sort()
-    print(multiplicand,"* A = ",graph_xc)
+    print(multiplicand," * A = ",graph_xc,'\nAlpha cut value is ', graph_y)
+    print()
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
         mpl.plot(graph_xc,graph_y,color="blue",label="Scalar A")
@@ -156,9 +157,9 @@ def scalar_mul(graph_x,graph_y):
 
 def inverse(graph_x,graph_y):
     j=len(graph_x)-1
-    #graph_xc=[min(graph_x[i],graph_x[j-i]) if (i<(j-i)) else max(graph_x[i],graph_x[j-i]) for i in range(len(graph_x))]
     graph_xc=[float(format(1/graph_x[j-i],'.5f'))for i in range(len(graph_x))]
     graph_xc.sort()
+    print("Inverse of A is",graph_xc,"\nAlpha cut value is ", graph_y)
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
         plot_cross(graph_x,graph_y)
@@ -188,7 +189,6 @@ def reverse(graph_x,graph_y,color,label):
         else:
             graph_y = graph_y[(round((len(graph_y))/2)):len(graph_y)]
             graph_y.extend(graph_y[-2::-1])
-            print("extended graph",graph_y)
             mpl.plot(graph_x,graph_y,color=color,label=label)
             plot_cross(graph_x,graph_y)
             mpl.legend()
@@ -281,10 +281,12 @@ def basic_opp(option,graph_x,n,fuzzy_no,name):
             print("\n Here, the fuzzy number: ",name, ": (",graph_x[(int(fuzzy_no/2)-1):(int(fuzzy_no/2)+1)]," : ",l_limit[::-1],": ",u_limit,")")
             print("\n That is fuzzy number",name,': ',graph_x)
             print("\n Also, fuzzy number",name,"is SYMMETRIC")
+            print("\n Alpha cut value of graph ",name,"is :",graph_y)
         else:
             print("\n Here, the fuzzy number: ",name,": (",graph_x[(int(fuzzy_no/2)-1):(int(fuzzy_no/2)+1)]," : ",l_limit[::-1],": ",u_limit,")")
             print("\n That is fuzzy number",name,': ',graph_x)
             print("\n Also, fuzzy number ",name,"is NON-SYMMETRIC")
+            print("\n Alpha cut value of graph ",name,"is :",graph_y)
         return(graph_y,midpoint)
 
 print("GRAPHICAL REPRESENTATION OF NEW ARITHMETICS OPERATIONS OF")
