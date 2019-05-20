@@ -11,7 +11,7 @@ def plot_cross(graph_x,graph_y):
     for i in range (0,len(graph_x)):      #To plot the multiple cutting line
         temp_x=[graph_x[i],graph_x[i]]          #for sending the y value it plot for each cutting line it will move to the next y value
         y=[0,graph_y[i]]
-        mpl.plot(temp_x,y,'--c')
+        mpl.plot(temp_x,y,'--m')
         temp_x=[graph_y[i],graph_y[i]]          #for sending the y value it plot for each cutting line it will move to the next y value
         y=[0,graph_x[i]]
         clr="red"
@@ -65,10 +65,10 @@ def Multiplication(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option,midpoin
         print("\nThe multiplication  of A and B is ",graph_xc)
         angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number \n"))
         if(angle==1):
-            plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
             plot_cross(graph_xa,graph_ya)
             plot_cross(graph_xb,graph_yb)
             plot_cross(graph_xc,graph_yc)
+            plot_graph(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
         elif(angle==2):
             reverse(graph_xa,graph_ya,color="red",label="A")
             reverse(graph_xb,graph_yb,color="green",label="B")
@@ -241,13 +241,13 @@ def get_val(operation):
 def basic_opp(option,graph_x,n,fuzzy_no,name):
     compare=graph_x[1]-graph_x[0]
     isSymmetric= True
-    graph_y=[(i/(n-1)) for i in range (0,n)]
+    graph_y=[float(format(i/(n-1),'.5f')) for i in range (0,n)]
     if(option==1):
         graph_y=graph_y+graph_y[-2::-1]
         midpoint=(int((fuzzy_no)/2))
         print("The classic number of ",name," is [",graph_x[midpoint],"]")
-        l_limit=[(graph_x[i+1]-graph_x[i])for i in range(0,(int(fuzzy_no/2)))]
-        u_limit=[(graph_x[i+1]-graph_x[i])for i in range((int((fuzzy_no)/2)),fuzzy_no-1)]
+        l_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range(0,(int(fuzzy_no/2)))]
+        u_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range((int((fuzzy_no)/2)),fuzzy_no-1)]
         for i in range(0,fuzzy_no-1):
             if((graph_x[i+1]-graph_x[i])!=compare):
                 isSymmetric= False
@@ -264,8 +264,8 @@ def basic_opp(option,graph_x,n,fuzzy_no,name):
         return(graph_y,midpoint)
     elif(option==2):
         graph_y=graph_y+graph_y[-1::-1]
-        l_limit=[(graph_x[i+1]-graph_x[i])for i in range(0,(int(fuzzy_no/2))-1)]
-        u_limit=[(graph_x[i+1]-graph_x[i])for i in range((int((fuzzy_no)/2)),fuzzy_no-1)]
+        l_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range(0,(int(fuzzy_no/2))-1)]
+        u_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range((int((fuzzy_no)/2)),fuzzy_no-1)]
         midpoint=[(int((fuzzy_no/2)-1)),(int(fuzzy_no/2))]
         print("\n The classic number of",name,"is [",graph_x[midpoint[0]]," , ",graph_x[midpoint[1]],"]")
         for i in range(0,int(fuzzy_no/2)-2):
@@ -276,9 +276,11 @@ def basic_opp(option,graph_x,n,fuzzy_no,name):
                 isSymmetric=False;
         if(isSymmetric):
             print("\n Here, the fuzzy number: ",name, ": (",graph_x[(int(fuzzy_no/2)-1):(int(fuzzy_no/2)+1)]," : ",l_limit[::-1],": ",u_limit,")")
+            print("\n That is fuzzy number",name,': ',graph_x)
             print("\n Also, fuzzy number",name,"is SYMMETRIC")
         else:
             print("\n Here, the fuzzy number: ",name,": (",graph_x[(int(fuzzy_no/2)-1):(int(fuzzy_no/2)+1)]," : ",l_limit[::-1],": ",u_limit,")")
+            print("\n That is fuzzy number",name,': ',graph_x)
             print("\n Also, fuzzy number ",name,"is NON-SYMMETRIC")
         return(graph_y,midpoint)
 
