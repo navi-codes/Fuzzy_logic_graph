@@ -124,7 +124,7 @@ def minimum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     elif(angle==2):
         reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
         reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
-        reverse(graph_xc,graph_yc,color="blue",label="A/B",crossColor='--b')
+        reverse(graph_xc,graph_yc,color="blue",label="min A/B",crossColor='--b')
 
 def maximum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     graph_xc=[max(graph_xa[i],graph_xb[i]) for i in range(len(graph_xa))]
@@ -138,7 +138,7 @@ def maximum(graph_xa,graph_ya,graph_xb,graph_yb,fuzzy_no,n,option):
     elif(angle==2):
         reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
         reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
-        reverse(graph_xc,graph_yc,color="blue",label="min A",crossColor='--b')
+        reverse(graph_xc,graph_yc,color="blue",label="max A/B",crossColor='--b')
 
 def scalar_mul(graph_x,graph_y):
     print("\n enter the multiplicand")
@@ -187,13 +187,13 @@ def reverse(graph_x,graph_y,color,label,crossColor):
             graph_y = graph_y[1:len(graph_y)]
             graph_y.append(graph_y[0])
             mpl.plot(graph_x,graph_y,color=color,label=label)
-            plot_cross(graph_x,graph_y)
+            plot_cross(graph_x,graph_y,crossColor)
             mpl.legend()
         else:
             graph_y = graph_y[(round((len(graph_y))/2)):len(graph_y)]
             graph_y.extend(graph_y[-2::-1])
             mpl.plot(graph_x,graph_y,color=color,label=label)
-            plot_cross(graph_x,graph_y)
+            plot_cross(graph_x,graph_y,crossColor)
             mpl.legend()
 
 def get_val(operation):
