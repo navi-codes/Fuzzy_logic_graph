@@ -152,8 +152,8 @@ def scalar_mul(graph_x,graph_y):
         mpl.plot(graph_xc,graph_y,color="blue",label="Scalar A")
         mpl.plot(graph_x,graph_y,color="red",label="graph A")
         mpl.legend()
-        plot_cross(graph_xa,graph_ya,'--r')
-        plot_cross(graph_xc,graph_yc,'--b')
+        plot_cross(graph_x,graph_y,'--r')
+        plot_cross(graph_xc,graph_y,'--b')
     elif(angle==2):
         reverse(graph_x,graph_y,color="red",label="A",crossColor='--r')
         reverse(graph_xc,graph_y,color="blue",label="Scalar A",crossColor='--b')
@@ -165,8 +165,8 @@ def inverse(graph_x,graph_y):
     print("Inverse of A is",graph_xc,"\nAlpha cut value is ", graph_y)
     angle=int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number\n"))
     if(angle==1):
-        plot_cross(graph_xa,graph_ya,'--r')
-        plot_cross(graph_xc,graph_yc,'--b')
+        plot_cross(graph_x,graph_y,'--r')
+        plot_cross(graph_xc,graph_y,'--b')
         mpl.plot(graph_xc,graph_y,color="blue",label="Inverse A")
         mpl.plot(graph_x,graph_y,color="red",label="Graph A")
         mpl.legend()
@@ -190,7 +190,7 @@ def reverse(graph_x,graph_y,color,label,crossColor):
             plot_cross(graph_x,graph_y,crossColor)
             mpl.legend()
         else:
-            graph_y = graph_y[(round((len(graph_y))/2)):len(graph_y)]
+            graph_y = graph_y[(round((len(graph_y)-1)/2)):len(graph_y)]
             graph_y.extend(graph_y[-2::-1])
             mpl.plot(graph_x,graph_y,color=color,label=label)
             plot_cross(graph_x,graph_y,crossColor)
@@ -248,7 +248,8 @@ def basic_opp(option,graph_x,n,fuzzy_no,name):
     compare=graph_x[1]-graph_x[0]
     isSymmetric= True
     graph_y=[float(format(i/(n-1),'.5f')) for i in range (0,n)]
-    if(option==1):
+
+    if(option==1):#triangle
         graph_y=graph_y+graph_y[-2::-1]
         midpoint=(int((fuzzy_no)/2))
         print("The classic number of ",name," is [",graph_x[midpoint],"]")
@@ -268,7 +269,8 @@ def basic_opp(option,graph_x,n,fuzzy_no,name):
             print("\n Also, fuzzy number ",name,"is NON-SYMMETRIC")
             print("\n Alpha cut value of graph ",name,"is :",graph_y)
         return(graph_y,midpoint)
-    elif(option==2):
+
+    elif(option==2):#Trapisoid
         graph_y=graph_y+graph_y[-1::-1]
         l_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range(0,(int(fuzzy_no/2))-1)]
         u_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range((int((fuzzy_no)/2)),fuzzy_no-1)]
