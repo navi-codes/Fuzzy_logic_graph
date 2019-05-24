@@ -103,24 +103,23 @@ class FuzzyLogic():
             self.to(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A/B")
 
     def minimum(self,graph_xa,graph_ya,graph_xb,graph_yb):
-        graph_xc=[float(format(min(graph_xa[i],graph_xb[i],'.5f'))) for i in range(len(graph_xa))]
+        graph_xc=[float(format(min(graph_xa[i],graph_xb[i]),'.5f')) for i in range(len(graph_xa))]
         graph_yc=self.get_graph_y()
         angle=self.get_angel()
         if(angle==1):
-            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"min")
+            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"min AB")
         elif(angle==2):
-            self.reverse(self,graph_xa,graph_ya,color="red",label="A",crossColor='--r')
-            self.reverse(graph_xb,graph_yb,color="green",label="B",crossColor='--g')
-            self.reverse(graph_xc,graph_yc,color="blue",label="min A/B",crossColor='--b')
+            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"min AB")
+
 
     def maximum(self,graph_xa,graph_ya,graph_xb,graph_yb):
-        graph_xc=[float(format(max(graph_xa[i],graph_xb[i],'.5f'))) for i in range(len(graph_xa))]
+        graph_xc=[float(format(max(graph_xa[i],graph_xb[i]),'.5f')) for i in range(len(graph_xa))]
         graph_yc=self.get_graph_y()
         angle=self.get_angel()
         if(angle==1):
-            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max")
+            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max AB")
         elif(angle==2):
-            self.to_reverse(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max")
+            self.to_reverse(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max AB")
 
     def scalar_mul(self,graph_x,graph_y):
         print("\n enter the multiplicand")
