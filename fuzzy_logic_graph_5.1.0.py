@@ -90,7 +90,7 @@ class FuzzyLogic():
             if(angle==1):
                 self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
             elif(angle==2):
-                self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
+                self.to_reverse(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A*B")
 
     def Division(self,graph_xa,graph_ya,graph_xb,graph_yb):
         graph_xb=graph_xb[::-1]
@@ -100,29 +100,28 @@ class FuzzyLogic():
         if(angle==1):
             self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A/B")
         elif(angle==2):
-            self.to(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A/B")
+            self.to_reverse(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"A/B")
 
     def minimum(self,graph_xa,graph_ya,graph_xb,graph_yb):
         graph_xc=[float(format(min(graph_xa[i],graph_xb[i]),'.5f')) for i in range(len(graph_xa))]
         graph_yc=self.get_graph_y()
         angle=self.get_angel()
         if(angle==1):
-            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"min AB")
+            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"Min(A,B)")
         elif(angle==2):
-            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"min AB")
-
+            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"Min(A,B)")
 
     def maximum(self,graph_xa,graph_ya,graph_xb,graph_yb):
         graph_xc=[float(format(max(graph_xa[i],graph_xb[i]),'.5f')) for i in range(len(graph_xa))]
         graph_yc=self.get_graph_y()
         angle=self.get_angel()
         if(angle==1):
-            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max AB")
+            self.on_complete(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"Max(A,B)")
         elif(angle==2):
-            self.to_reverse(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"max AB")
+            self.to_reverse(graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,"Max(A,B)")
 
     def scalar_mul(self,graph_x,graph_y):
-        print("\n enter the multiplicand")
+        print("\n Enter the sCALAR VALUE:")
         multiplicand=int(input())
         graph_xc=[float(format(multiplicand*graph_x[i],'.5f')) for i in range(len(graph_x))]
         graph_xc.sort()
@@ -130,13 +129,13 @@ class FuzzyLogic():
         angle=self.get_angel()
         if(angle==1):
             mpl.plot(graph_xc,graph_y,color="blue",label="Scalar A")
-            mpl.plot(graph_x,graph_y,color="red",label="graph A")
+            mpl.plot(graph_x,graph_y,color="red",label="Graph A")
             mpl.legend()
             self.plot_cross(graph_x,graph_y,'--r')
             self.plot_cross(graph_xc,graph_y,'--b')
         elif(angle==2):
             self.reverse(graph_x,graph_y,color="red",label="A",crossColor='--r')
-            self.reverse(graph_xc,graph_y,color="blue",label="Scalar A",crossColor='--b')
+            self.reverse(graph_xc,graph_y,color="blue",label="Scalar*A",crossColor='--b')
 
     def inverse(self,graph_x,graph_y):
         j=len(graph_x)-1
@@ -230,13 +229,13 @@ class FuzzyLogic():
             l_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range(0,(int(self.fuzzy_no/2)))]
             u_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range((int((self.fuzzy_no)/2)),self.fuzzy_no-1)]
         elif(self.graph_type==2):
-            classic_no = [graph_x[midpoint[0]],graph_x[midpoint[0]]]
+            classic_no = [graph_x[midpoint[0]],graph_x[midpoint[1]]]
             l_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range(0,(int(self.fuzzy_no/2))-1)]
             u_limit=[float(format(graph_x[i+1]-graph_x[i],'.5f'))for i in range((int((self.fuzzy_no)/2)),self.fuzzy_no-1)]
         for i in range(0,self.fuzzy_no-1):
             if((graph_x[i+1]-graph_x[i])!=compare):
                 isSymmetric= False
-        print("The classic number of ",name," is ",classic_no,)
+        print("The classical number of ",name," is ",classic_no,)
         print("\n Here, the fuzzy number: ",name,": (",graph_x[(int((self.fuzzy_no)/2))]," : ",l_limit[::-1],": ",u_limit,")")
         print("\n That is fuzzy number",name,': ',graph_x)
         print("\n Also, fuzzy number",name,"is",isSymmetric and 'SYMMETRIC' or 'NON-SYMMETRIC')
@@ -258,7 +257,7 @@ class FuzzyLogic():
             return([(int((self.fuzzy_no/2)-1)),(int(self.fuzzy_no/2))])
 
     def get_angel(self):
-        return(int(input("Press 1 Graphicly Normal order fuzzy number\nPress 2 Graphicly Reverse order fuzzy number\n")))
+        return(int(input("Press 1 Graphically Normal fuzzy number\nPress 2 Graphically Reverse order fuzzy number\n")))
 
     def to_reverse(self,graph_xa,graph_ya,graph_xb,graph_yb,graph_xc,graph_yc,label):
         self.reverse(graph_xa,graph_ya,color="red",label="A",crossColor='--r')
@@ -271,7 +270,7 @@ class FuzzyLogic():
         print("Press \n 1 ADDITION  2 SUBTRACTION   3 MULTIPLICATION  4 DIVISION \n 5 MINIMUM  6 MAXIMUM   7 SCALAR MULTIPLICATION   8 INVERSE \n FUZZY NUMBERS\n")
         operation=int(input())
         self.get_val(operation)
-        mpl.title('Graphcal representation of  fuzzy numbers')
+        mpl.title('GRAPHICAL REPRESENTATION OF FUZZY NUMBERS OPERATION')
         mpl.show()
 
 fuzzy_processor = FuzzyLogic()
