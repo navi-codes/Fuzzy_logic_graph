@@ -64,6 +64,9 @@ class FuzzyLogic():
             self.on_complete(graph_xc,graph_yc,"A-B")
         elif(angle==2):
             self.to_reverse(graph_xc,graph_yc,"A-B")
+        else:
+            print("Invalid input")
+            self.Subtraction()
 
     def Multiplication(self):
         midpoint=self.get_mid_point()
@@ -103,6 +106,7 @@ class FuzzyLogic():
         graph_xc=[float(format(self.graph_xa[i]/self.div_graph_xb[i],'.5f'))for i in range(0,len(self.graph_xa))]
         graph_yc=self.get_graph_y()
         angle=self.get_angel()
+        graph_xc.sort()
         if(angle==1):
             self.on_complete(graph_xc,graph_yc,"A/B")
         elif(angle==2):
@@ -127,7 +131,7 @@ class FuzzyLogic():
             self.to_reverse(graph_xc,graph_yc,"Max(A,B)")
 
     def scalar_mul(self):
-        print("\n Enter the sCALAR VALUE:")
+        print("\n Enter the SCALAR VALUE:")
         multiplicand=int(input())
         graph_xc=[float(format(multiplicand*self.graph_xa[i],'.5f')) for i in range(len(self.graph_xa))]
         graph_xc.sort()
@@ -188,49 +192,58 @@ class FuzzyLogic():
         if (self.is_first and self.begin_again):
             print("Enter the n-gonal fuzzy number, where n= 2,3,4...\n")
             self.n_gonal=int(input())
-            if(self.n_gonal==1):
+            if(self.n_gonal<=1):
                 print("invalid input\n")
-                get_val() #1 is invalid input so it will promt to inter again
+                self.get_val(operation) #1 is invalid input so it will promt to inter again
             else:
                 print("press \n 1 GRAPHICAL REPRESENTATION OF n-TRIANGULAR SHAPE FUZZY NUMBER \n 2 GRAPHICAL REPRESENTATION OF n-TRAPEZOIDAL SHAPE FUZZY NUMBER \n")
                 self.graph_type=int(input())
-            if(self.graph_type==1):
-                self.fuzzy_no=(2*self.n_gonal)-1 #formula
-            elif(self.graph_type==2):
-                self.fuzzy_no=2*self.n_gonal
+                if 1<= self.graph_type <=2:
+                    if(self.graph_type==1):
+                        self.fuzzy_no=(2*self.n_gonal)-1 #formula
+                    elif(self.graph_type==2):
+                        self.fuzzy_no=2*self.n_gonal
+                    if((operation>=1) and(operation<=6)):
+                        print("\n ENTER ",self.fuzzy_no,"PARAMETERS FOR GRAPH A")
+                        self.graph_xa=[float(input()) for i in range(0,self.fuzzy_no)] #Taking points from the user
+                        self.graph_ya=self.get_graph_y()#Y axis value calculated and stoblue to the list
+                        print("\n ENTER ",self.fuzzy_no," PARAMETERS FOR GRAPH B")
+                        self.graph_xb=[float(input()) for i in range(0,self.fuzzy_no)] #Taking points from the user
+                        #Y axis value and midpoint calculation
+                        self.graph_yb=self.get_graph_y()
+                    elif(operation>=7):
+                        print("\n ENTER ",self.fuzzy_no," PARAMETERS FOR GRAPH A")
+                        self.graph_xa=[float(input()) for i in range(0,self.fuzzy_no)] #Taking points from the user
+                        self.graph_ya=self.get_graph_y()
+                    self.is_first = False
+                else:
+                    print("\nInvalid input")
+                self.get_val(operation)
 
-            if((operation>=1) and(operation<=6)):
-                print("\n ENTER ",self.fuzzy_no,"PARAMETERS FOR GRAPH A")
-                self.graph_xa=[float(input()) for i in range(0,self.fuzzy_no)] #Taking points from the user
-                self.graph_ya=self.get_graph_y()#Y axis value calculated and stoblue to the list
-                print("\n ENTER ",self.fuzzy_no," PARAMETERS FOR GRAPH B")
-                self.graph_xb=[float(input()) for i in range(0,self.fuzzy_no)] #Taking points from the user
-                #Y axis value and midpoint calculation
-                self.graph_yb=self.get_graph_y()
-            elif(operation>=7):
-                print("\n ENTER ",self.fuzzy_no," PARAMETERS FOR GRAPH A")
-                self.graph_xa=[float(input()) for i in range(0,self.fuzzy_no)] #Taking points from the user
-                self.graph_ya=self.get_graph_y()
-            self.is_first = False
-
-        if(operation==1):
-           self.Addition()
-        if(operation==2):
-           self.Subtraction()
-        if(operation==3):
-           self.Multiplication()
-        if(operation==4):
-           self.Division()
-        if(operation==5):
-           self.minimum()
-        if(operation==6):
-           self.maximum()
-        if(operation==7):
-            self.scalar_mul()
-        if(operation==8):
-            self.inverse()
-        if(operation==9):
-            self.begin_again = False
+    def menu(self,operation):
+        if 1 <= operation <= 9:
+            self.get_val(operation)
+            if(operation==1):
+               self.Addition()
+            if(operation==2):
+               self.Subtraction()
+            if(operation==3):
+               self.Multiplication()
+            if(operation==4):
+               self.Division()
+            if(operation==5):
+               self.minimum()
+            if(operation==6):
+               self.maximum()
+            if(operation==7):
+                self.scalar_mul()
+            if(operation==8):
+                self.inverse()
+            if(operation==9):
+                self.begin_again = False
+        else:
+            print("Invalid input try again")
+            self.main()
 
     def print_result(self,graph_x,graph_y,name):
         compare=graph_x[1]-graph_x[0]
@@ -281,14 +294,11 @@ class FuzzyLogic():
 
     def main(self):
         while (self.begin_again==True):
-            print(self.begin_again)
             print("GRAPHICAL REPRESENTATION OF NEW ARITHMETICS OPERATIONS OF")
             print("FUZZY NUMBERS FOR TRAPEZOIDAL AND TRIANGULAR SHAPES")
             print("Press \n 1 ADDITION  2 SUBTRACTION   3 MULTIPLICATION  4 DIVISION \n 5 MINIMUM  6 MAXIMUM   7 SCALAR MULTIPLICATION   8 INVERSE  9 EXIT \n FUZZY NUMBERS\n")
             operation=int(input())
-            if(operation==9):
-                self.begin_again = False
-            self.get_val(operation)
+            self.menu(operation)
             if self.begin_again:
                 mpl.title('GRAPHICAL REPRESENTATION OF FUZZY NUMBERS OPERATION')
                 mpl.show()
