@@ -138,7 +138,7 @@ class FuzzyLogic():
         print(multiplicand," * A = ",graph_xc,'\nAlpha cut value is ', self.graph_ya)
         angle=self.get_angel()
         if(angle==1):
-            mpl.plot(graph_xc,graph_y,color="blue",label="Scalar A")
+            mpl.plot(graph_xc,self.graph_ya,color="blue",label="Scalar A")
             mpl.plot(self.graph_xa,self.graph_ya,color="red",label="Graph A")
             mpl.legend()
             self.plot_cross(self.graph_xa,self.graph_ya,'--r')
