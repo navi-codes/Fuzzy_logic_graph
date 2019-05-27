@@ -70,6 +70,7 @@ class FuzzyLogic():
 
     def Multiplication(self):
         midpoint=self.get_mid_point()
+        graph_yc=self.get_graph_y()
         if(self.graph_type==1):
             graph_xc=[self.graph_xa[midpoint]*self.graph_xb[midpoint]]
             for i in range(1,midpoint+1):
@@ -78,8 +79,6 @@ class FuzzyLogic():
                 graph_xc.append(float(format(min(temp),'.5f')))
                 temp=[]
             graph_xc.sort()
-            graph_yc=self.get_graph_y()
-            print("\nThe multiplication  of A and B is ",graph_xc)
             angle=self.get_angel()
             if(angle==1):
                 self.on_complete(graph_xc,graph_yc,"A*B")
@@ -93,8 +92,6 @@ class FuzzyLogic():
                 graph_xc.append(float(format(min(temp),'.5f')))
                 temp=[]
             graph_xc.sort()
-            graph_yc=self.get_graph_y()
-            print("\nThe multiplication  of A and B is ",graph_xc)
             angle=self.get_angel()
             if(angle==1):
                 self.on_complete(graph_xc,graph_yc,"A*B")
@@ -103,9 +100,23 @@ class FuzzyLogic():
 
     def Division(self):
         self.div_graph_xb=self.graph_xb[::-1]
-        graph_xc=[float(format(self.graph_xa[i]/self.div_graph_xb[i],'.5f'))for i in range(0,len(self.graph_xa))]
         graph_yc=self.get_graph_y()
         angle=self.get_angel()
+        graph_xc = []
+        midpoint = self.get_mid_point()
+        if(self.graph_type==1):
+            graph_xc=[self.graph_xa[midpoint]*(1/(self.div_graph_xb[midpoint]))]
+            for i in range(1,midpoint+1):
+                temp=[(self.graph_xa[midpoint-i]*(1/(self.div_graph_xb[midpoint-i]))),(self.graph_xa[midpoint-i]*(1/(self.div_graph_xb[midpoint+i]))),(self.graph_xa[midpoint+i]*(1/(self.div_graph_xb[midpoint-i]))),(self.graph_xa[midpoint+i]*(1/(self.div_graph_xb[midpoint+i])))]
+                graph_xc.append(float(format(max(temp),'.5f')))
+                graph_xc.append(float(format(min(temp),'.5f')))
+                temp=[]
+        elif(self.graph_type==2):
+            for i in range(0,midpoint[1]):
+                    temp=[(self.graph_xa[(midpoint[0])-i]*(1/(self.div_graph_xb[(midpoint[0])-i]))),(self.graph_xa[(midpoint[0])-i]*(1/(self.div_graph_xb[(midpoint[1])+i]))),(self.graph_xa[(midpoint[1])+i]*(1/(self.div_graph_xb[(midpoint[0])-i]))),(self.graph_xa[(midpoint[1])+i]*(1/(self.div_graph_xb[(midpoint[1])+i])))]
+                    graph_xc.append(float(format(max(temp),'.5f')))
+                    graph_xc.append(float(format(min(temp),'.5f')))
+                    temp=[]
         graph_xc.sort()
         if(angle==1):
             self.on_complete(graph_xc,graph_yc,"A/B")
@@ -148,8 +159,8 @@ class FuzzyLogic():
             self.reverse(graph_xc,self.graph_ya,color="blue",label="Scalar*A",crossColor='--b')
 
     def inverse(self):
-        j=len(self.graph_xa)-1
-        graph_xc=[float(format(1/self.graph_xa[j-i],'.5f'))for i in range(len(self.graph_xa))]
+        length_xa=len(self.graph_xa)-1
+        graph_xc=[float(format(1/self.graph_xa[length_xa-i],'.5f'))for i in range(len(self.graph_xa))]
         graph_xc.sort()
         print("Inverse of A is",graph_xc,"\nAlpha cut value is ", self.graph_ya)
         angle=self.get_angel()
