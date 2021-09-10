@@ -1,6 +1,6 @@
 """
 Title:     fuzzy logic Program
-Author:    A Navaneethraj, RV Parthasarathi
+Author:    A Navaneethraj
 Version:   5.2.0 (Arithmetic operations)
 python Version: 3.5.2
 """
